@@ -4,7 +4,7 @@ import 'package:handly_app/pages/home.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: Home(),
+    initialRoute: '/home',
     routes: {
       '/home': (context) => Home(),
     },
