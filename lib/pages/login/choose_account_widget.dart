@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:handly_app/pages/home.dart';
-import 'package:handly_app/pages/login/login.dart';
 
 class ChooseAccount extends StatelessWidget {
 
@@ -109,8 +108,8 @@ class ChooseAccount extends StatelessWidget {
           ),
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, '/create_account');
-            },
+              goToSignUp();
+              },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -128,7 +127,9 @@ class ChooseAccount extends StatelessWidget {
         ), //Sign Up
         SizedBox(height: 12,),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            goToSignIn();
+          },
           child: Text(
             'ALREADY REGISTERED? SIGN IN',
             style: TextStyle(

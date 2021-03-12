@@ -6,9 +6,10 @@ import 'package:handly_app/pages/login/create_account.dart';
 import 'package:handly_app/pages/login/sign_in.dart';
 
 
+
 class Login extends StatelessWidget {
 
-
+  PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +62,33 @@ class Login extends StatelessWidget {
               SizedBox(height: 100,),
               Expanded(
                 child: PageView(
+                  physics: NeverScrollableScrollPhysics(),
+                  controller: pageController,
                   children: [
-                    SetPage(), // Look at the bottom need to be changeable
+                    ChooseAccount(
+                      goToSignIn: () {
+                        pageController.animateToPage(1, duration: Duration(milliseconds: 400), curve: Curves.easeIn);
+                      },
+                      goToSignUp: () {
+                        pageController.animateToPage(2, duration: Duration(milliseconds: 400), curve: Curves.easeIn);
+                      },
+                    ),
+                    SignIn(
+                      goToSignUp: () {
+                        pageController.animateToPage(2, duration: Duration(milliseconds: 400), curve: Curves.easeIn);
+                      },
+                      goToHome: () {
+                        pageController.animateToPage(0, duration: Duration(milliseconds: 400), curve: Curves.easeIn);
+                      },
+                    ),
+                    CreateNewAccount(
+                      cancelBackToHome: () {
+                        pageController.animateToPage(0, duration: Duration(milliseconds: 400), curve: Curves.easeIn);
+                      },
+                    ),
                     ],
                 ),
-              )
+              ),
             ],
           ),
           decoration: BoxDecoration(
@@ -81,21 +104,6 @@ class Login extends StatelessWidget {
         ), //Sign in Facebook
       ),
     );
-  }
-}
-
-class SetPage extends StatefulWidget {
-  @override
-  _SetPageState createState() => _SetPageState();
-}
-
-class _SetPageState extends State<SetPage> {
-  @override
-  Widget build(BuildContext context) {
-
-    var _page = ChooseAccount();
-
-    return _page;
   }
 }
 
