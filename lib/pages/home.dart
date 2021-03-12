@@ -1,5 +1,7 @@
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:handly_app/services/auth.dart';
 
 
 class Home extends StatefulWidget {
@@ -16,7 +18,39 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+
+    final AuthService _auth = AuthService();
+
     return Scaffold(
+      drawer: Drawer(
+        elevation: 1,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.lightBlue.withOpacity(0.9),
+          ),
+          child: ListView(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(120, 127, 246, 1.0),
+                ),
+              ),
+              ListTile(
+                tileColor: Colors.white.withOpacity(0.4),
+                  leading: Icon(Icons.logout),
+                title: Text(
+                  'Logout',
+                ),
+                onTap: () async {
+                  await _auth.signOut();
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(

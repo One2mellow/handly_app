@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:handly_app/pages/shared/loading.dart';
+import 'package:handly_app/services/auth.dart';
 
 class CreateNewAccount extends StatefulWidget {
 
@@ -14,16 +16,19 @@ class CreateNewAccount extends StatefulWidget {
 
 class _CreateNewAccountState extends State<CreateNewAccount> {
 
-  String email, password, passwordConfirm;
+  final AuthService _auth = AuthService();
+
+  String email = '', password = '', passwordConfirm = '';
   bool _termsAgreed = false;
   final formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   void createUser() {
   }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
+    return loading ? Loading() : Form(
       key: formKey,
       child: Container(
         child: Column(
@@ -76,7 +81,7 @@ class _CreateNewAccountState extends State<CreateNewAccount> {
                 color: Colors.white70,
                 fontSize: 15.0,
               ),
-            ),  //Username
+            ),  //Email
             SizedBox(height: 13,),
             TextFormField(
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -176,9 +181,16 @@ class _CreateNewAccountState extends State<CreateNewAccount> {
                 ),
                 SizedBox(width: 20,),
                 InkWell(
-                  onTap: () {
+                  onTap: () async {
                     if(formKey.currentState.validate()) {
-                      formKey.currentState.save();
+                      setState(() => loading = true);
+                      dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                      if (result == null) {
+                        AlertDialog(
+                          title: Text('ERROR!'),
+                          content: Text('Couldn\'t create Account with the given credentials'),
+                        );
+                      }
                     }
                   },
                   child: Container(
