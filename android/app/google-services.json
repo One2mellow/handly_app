@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "448198456133",
+    "project_id": "handly-app",
+    "storage_bucket": "handly-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448198456133:android:56c491c1501c440e0b442c",
+        "android_client_info": {
+          "package_name": "com.example.handly_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "448198456133-u8r57cptpcisdug6cken9ejg7kd0fkll.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuayyBBDI_ZWlxgEw5MILZtvEeAk9FHDk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "448198456133-u8r57cptpcisdug6cken9ejg7kd0fkll.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
