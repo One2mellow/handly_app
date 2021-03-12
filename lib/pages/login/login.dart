@@ -70,7 +70,7 @@ class Login extends StatelessWidget {
                         pageController.animateToPage(1, duration: Duration(milliseconds: 400), curve: Curves.easeIn);
                       },
                       goToSignUp: () {
-                        pageController.animateToPage(2, duration: Duration(milliseconds: 400), curve: Curves.easeIn);
+                        pageController.animateToPage(2, duration: Duration(milliseconds: 100), curve: Curves.easeIn);
                       },
                     ),
                     SignIn(

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:handly_app/pages/home.dart';
+import 'package:handly_app/services/auth.dart';
 
 class ChooseAccount extends StatelessWidget {
 
   final Function goToSignUp;
   final Function goToSignIn;
+  final AuthService _auth = AuthService();
 
   ChooseAccount({this.goToSignUp, this.goToSignIn});
 
@@ -103,7 +105,7 @@ class ChooseAccount extends StatelessWidget {
             horizontal: 20,
           ),
           decoration: BoxDecoration(
-            color: Colors.white70,
+            color: Colors.white70.withOpacity(0.68),
             borderRadius: BorderRadius.circular(50.0),
           ),
           child: InkWell(
@@ -140,6 +142,43 @@ class ChooseAccount extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: 80,),
+        Container(
+          padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
+          decoration: BoxDecoration(
+            color: Colors.white70.withOpacity(0.4),
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+          child: InkWell(
+            onTap: () async {
+              dynamic result = await _auth.signInAnon();
+              if (result == null) {
+                print('Unable to Sign In');
+              } else {
+                print('Sign in');
+                print(result);
+                
+              }
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  FontAwesomeIcons.fly,
+                  size: 30.0,
+                ),
+                Text(
+                  ' |  Sign in as Guest',
+                  style: TextStyle(
+                    color: Colors.indigo[900],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ), //Sign in as guest
       ],
     );
   }
