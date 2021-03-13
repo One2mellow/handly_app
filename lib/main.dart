@@ -22,7 +22,7 @@ void main() async {
 class HandlyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<NewUser>.value(
+    return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
         home: Wrapper(),
