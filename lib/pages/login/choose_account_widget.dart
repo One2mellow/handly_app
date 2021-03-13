@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:handly_app/pages/home.dart';
+import 'package:handly_app/pages/shared/loading.dart';
 import 'package:handly_app/services/auth.dart';
 
-class ChooseAccount extends StatelessWidget {
+class ChooseAccount extends StatefulWidget {
 
   final Function goToSignUp;
   final Function goToSignIn;
-  final AuthService _auth = AuthService();
 
   ChooseAccount({this.goToSignUp, this.goToSignIn});
 
   @override
+  _ChooseAccountState createState() => _ChooseAccountState();
+}
+
+class _ChooseAccountState extends State<ChooseAccount> {
+  final AuthService _auth = AuthService();
+
+  bool loading = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
+    return loading ? Loading() : Column(
       children: [
         Container(
           padding: EdgeInsets.symmetric(
@@ -24,26 +33,38 @@ class ChooseAccount extends StatelessWidget {
             color: Colors.white70,
             borderRadius: BorderRadius.circular(50.0),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                FontAwesomeIcons.facebookF,
-                size: 30.0,
-              ),
-              Text(
-                ' |  Sign in with Facebook',
-                style: TextStyle(
-                  color: Colors.indigo[900],
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
+          child: InkWell(
+            onTap: () async {
+              setState(() => loading = true);
+              dynamic result = await _auth.signInWithFacebook();
+              if (result == null) {
+                setState(() => loading = true);
+                print('Unable to Sign In');
+              } else {
+                print('Sign in');
+              }
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  FontAwesomeIcons.facebookF,
+                  size: 30.0,
                 ),
-              ),
-            ],
+                Text(
+                  ' |  Sign in with Facebook',
+                  style: TextStyle(
+                    color: Colors.indigo[900],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
           ),
         ), //Sign in Facebook
         SizedBox(height: 20,),
-        Container(
+        /*Container(
           padding: EdgeInsets.symmetric(
             vertical: 17,
             horizontal: 20,
@@ -70,7 +91,7 @@ class ChooseAccount extends StatelessWidget {
             ],
           ),
         ), //Sign in Twitter
-        SizedBox(height: 20,),
+        SizedBox(height: 20,),*/ //twitter button
         Container(
           padding: EdgeInsets.symmetric(
             vertical: 17,
@@ -80,22 +101,34 @@ class ChooseAccount extends StatelessWidget {
             color: Colors.white70,
             borderRadius: BorderRadius.circular(50.0),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                FontAwesomeIcons.google,
-                size: 30.0,
-              ),
-              Text(
-                ' |  Sign in with Google',
-                style: TextStyle(
-                  color: Colors.indigo[900],
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
+          child: InkWell(
+            onTap: () async {
+              setState(() => loading = true);
+              dynamic result = await _auth.signInWithGoogle();
+              if (result == null) {
+                setState(() => loading = false);
+                print('Unable to Sign In');
+              } else {
+                print('Sign in');
+              }
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  FontAwesomeIcons.google,
+                  size: 30.0,
                 ),
-              ),
-            ],
+                Text(
+                  ' |  Sign in with Google',
+                  style: TextStyle(
+                    color: Colors.indigo[900],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
           ),
         ), //Sign in Google
         SizedBox(height: 20,),
@@ -110,7 +143,7 @@ class ChooseAccount extends StatelessWidget {
           ),
           child: InkWell(
             onTap: () {
-              goToSignUp();
+              widget.goToSignUp();
               },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -130,7 +163,7 @@ class ChooseAccount extends StatelessWidget {
         SizedBox(height: 12,),
         InkWell(
           onTap: () {
-            goToSignIn();
+            widget.goToSignIn();
           },
           child: Text(
             'ALREADY REGISTERED? SIGN IN',
@@ -142,7 +175,7 @@ class ChooseAccount extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 80,),
+        SizedBox(height: 160,),
         Container(
           padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
           decoration: BoxDecoration(
@@ -151,13 +184,15 @@ class ChooseAccount extends StatelessWidget {
           ),
           child: InkWell(
             onTap: () async {
+              setState(() => loading = true);
               dynamic result = await _auth.signInAnon();
               if (result == null) {
+                setState(() => loading = false);
                 print('Unable to Sign In');
               } else {
                 print('Sign in');
                 print(result);
-                
+
               }
             },
             child: Row(

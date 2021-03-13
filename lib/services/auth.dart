@@ -1,11 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:handly_app/models/user.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 
 class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
 
   // create user obj based on FirebaseUser
   NewUser _userFromFirebaseUser(User user) {
@@ -17,6 +20,51 @@ class AuthService {
   Stream <User> get user {
     return _auth.authStateChanges();
   }
+
+
+  //sign in with google
+  Future signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+    // Create a new credential
+    final GoogleAuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    UserCredential result = await FirebaseAuth.instance.signInWithCredential(credential); // Once signed in, return the UserCredential
+    User user = result.user;
+
+    return result;
+  }
+
+  //sign in with facebook
+  Future signInWithFacebook() async {
+    try {
+      // Trigger the sign-in flow
+      final  result = await FacebookAuth.instance.login();
+
+      // Create a credential from the access token
+      final FacebookAuthCredential facebookAuthCredential =
+      FacebookAuthProvider.credential(result.token);
+
+      // Once signed in, return the UserCredential
+      UserCredential res = await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+      User user = res.user;
+      return user;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+
+  }
+
+  //sign in with twitter
+
 
   //sign in anon
   Future signInAnon() async {
