@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:handly_app/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:handly_app/models/user.dart';
 
 
 class AuthService {
@@ -10,10 +11,7 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
 
-  // create user obj based on FirebaseUser
-  NewUser _userFromFirebaseUser(User user) {
-    return user != null ? NewUser(uid: user.uid) : null;
-  }
+
 
 
   //auth change user stream
@@ -22,6 +20,11 @@ class AuthService {
   }
 
 
+  //user profile
+ /* UserProfile profile (User user) {
+    return user != null ? UserProfile(name: user.displayName, email: user.email, anon: user.isAnonymous, uid: user.uid) : null;
+  }
+*/
   //sign in with google
   Future signInWithGoogle() async {
     // Trigger the authentication flow

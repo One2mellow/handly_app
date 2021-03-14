@@ -1,8 +1,10 @@
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:handly_app/pages/shared/loading.dart';
 import 'package:handly_app/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 
 class Home extends StatefulWidget {
@@ -12,14 +14,30 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
+  final FirebaseAuth _ath = FirebaseAuth.instance;
+
   String profileImage = 'https://www.rollingstone.com/wp-content/uploads/2018/07/dave-grohl-4870a23d-5f88-404f-8848-db39e6508261-e1530527310623.jpg';
-  String userProfile = 'Dave Grohl';
+  String userProfile;
+  String email;
   int rating = 250;
+
+
 
   @override
   Widget build(BuildContext context) {
-
     final AuthService _auth = AuthService();
+    final User user = _ath.currentUser;
+    print(user);
+    if (user.displayName != null ) {
+      setState(() {
+        userProfile = user.displayName;
+        email = user.email;
+      });
+    } else {
+      setState(() {
+        userProfile = 'Hello User';
+      });
+    }
 
     return Scaffold(
       drawer: Drawer(
@@ -51,74 +69,101 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            title: SafeArea(
-              child:
-              Text(
-                '$userProfile',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Comforta',
-                  color: Colors.grey[400],
-                  fontSize: 25,
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.orange.withOpacity(0.1),
+        ),
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              title: SafeArea(
+                child:
+                Text(
+                  '$userProfile',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Comforta',
+                    color: Colors.grey[400],
+                    fontSize: 25,
+                  ),
                 ),
               ),
-            ),
-            centerTitle: true,
-            elevation: 0,
-            backgroundColor: Colors.indigo,
-            bottom: PreferredSize(
-              child:Transform.translate(
-                offset: const Offset(0, 30),
-                child:  Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(width: 70,),
-                        Expanded(
-                          flex: 1,
-                          child: Text(
-                            'Community Score:',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontFamily: 'Comforta',
-                              color: Colors.grey[400],
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                            flex: 2,
+              centerTitle: true,
+              elevation: 0,
+              backgroundColor: Colors.indigo,
+              bottom: PreferredSize(
+                child:Transform.translate(
+                  offset: const Offset(0, 30),
+                  child:  Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(width: 70,),
+                          Expanded(
+                            flex: 1,
                             child: Text(
-                              '$rating',
+                              'Community Score:',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w300,
                                 fontFamily: 'Comforta',
-                                color: Colors.lightGreenAccent,
+                                color: Colors.grey[400],
                                 fontSize: 15,
                               ),
-                            )
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 10,),
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundImage: NetworkImage(profileImage),
-                    ),
-                  ],
+                            ),
+                          ),
+                          Expanded(
+                              flex: 2,
+                              child: Text(
+                                '$rating',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Comforta',
+                                  color: Colors.lightGreenAccent,
+                                  fontSize: 15,
+                                ),
+                              )
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 10,),
+                      CircleAvatar(
+                        radius: 50,
+                        backgroundImage: NetworkImage(profileImage),
+                      ),
+                    ],
+                  ),
                 ),
+                preferredSize: const Size.fromHeight(0.0),
               ),
-              preferredSize: const Size.fromHeight(0.0),
+              floating: true,
+              expandedHeight: 200,
             ),
-            floating: true,
-            expandedHeight: 200,
-          ),
+            SliverList(
+                delegate: SliverChildListDelegate([
+                  Card(
+                    child: ListTileTheme(
+                      contentPadding: EdgeInsets.all(20),
+                      child: ListTile(
+                        leading: Icon(Icons.pin_drop_outlined),
+                        title: Text('Give me a hand'),
+                      ),
+                    ),
+                  ),
+                  Card(
+                    child: ListTileTheme(
+                      contentPadding: EdgeInsets.all(20),
+                      child: ListTile(
+                        leading: Icon(Icons.pin_drop_outlined),
+                        title: Text('Let\'s hang out'),
+                      ),
+                    ),
+                  ),
+                ])
+            ),
 
-        ],
+          ],
+        ),
       ),
       floatingActionButton: FabCircularMenu(
         fabOpenIcon: Icon(Icons.record_voice_over_sharp),
