@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:handly_app/pages/home.dart';
+import 'package:handly_app/pages/home/home.dart';
 import 'package:handly_app/pages/login/choose_account_widget.dart';
 import 'package:handly_app/pages/login/create_account.dart';
 import 'package:handly_app/pages/login/login.dart';

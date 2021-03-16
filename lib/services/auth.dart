@@ -15,11 +15,6 @@ class AuthService {
   }
 
 
-  //user profile
- /* UserProfile profile (User user) {
-    return user != null ? UserProfile(name: user.displayName, email: user.email, anon: user.isAnonymous, uid: user.uid) : null;
-  }
-*/
   //sign in with google
   Future signInWithGoogle() async {
     // Trigger the authentication flow
