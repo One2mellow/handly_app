@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:handly_app/pages/home.dart';
+import 'package:handly_app/pages/home/home.dart';
 import 'package:handly_app/pages/shared/loading.dart';
 import 'package:handly_app/services/auth.dart';
 
