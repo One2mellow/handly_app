@@ -17,12 +17,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   final FirebaseAuth _ath = FirebaseAuth.instance;
   final AuthService _auth = AuthService();
+  final GlobalKey<FabCircularMenuState> fabKey = GlobalKey();
 
 
   String profileImage = 'https://www.rollingstone.com/wp-content/uploads/2018/07/dave-grohl-4870a23d-5f88-404f-8848-db39e6508261-e1530527310623.jpg';
   String userProfile;
   String email;
-  int rating = 250;
+  int score = 250;
 
 
 
@@ -129,7 +130,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               Expanded(
                                   flex: 2,
                                   child: Text(
-                                    '$rating',
+                                    '$score',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Comforta',
@@ -157,77 +158,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           body: HandlyCallsList(),
         ),
 
-         /*CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                title: SafeArea(
-                  child:
-                  Text(
-                    '$userProfile',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Comforta',
-                      color: Colors.grey[400],
-                      fontSize: 25,
-                    ),
-                  ),
-                ),
-                centerTitle: true,
-                elevation: 0,
-                backgroundColor: Colors.indigo,
-                bottom: PreferredSize(
-                  child:Transform.translate(
-                    offset: const Offset(0, 30),
-                    child:  Column(
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(width: 70,),
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                'Community Score:',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  fontFamily: 'Comforta',
-                                  color: Colors.grey[400],
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                                flex: 2,
-                                child: Text(
-                                  '$rating',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Comforta',
-                                    color: Colors.lightGreenAccent,
-                                    fontSize: 15,
-                                  ),
-                                )
-                            )
-                          ],
-                        ),
-                        SizedBox(height: 10,),
-                        CircleAvatar(
-                          radius: 50,
-                          backgroundImage: NetworkImage(profileImage),
-                        ),
-                      ],
-                    ),
-                  ),
-                  preferredSize: const Size.fromHeight(0.0),
-                ),
-                floating: true,
-                expandedHeight: 200,
-              ),
-              HandlyCallsList(),
-            ],
-          ),*/
-
          floatingActionButton: FabCircularMenu(
+           key: fabKey,
           fabOpenIcon: Icon(Icons.record_voice_over_sharp),
           alignment: Alignment.bottomCenter,
           ringDiameter: 200,
@@ -241,18 +173,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 icon: Icon(Icons.pan_tool),
                 color: Colors.amberAccent,
                 iconSize: 40,
-                onPressed: () async {
-                  await HandlyCallsDatabaseService(uid: (user.uid +' time ' + (DateTime.now().millisecondsSinceEpoch).toString())).createHandlyCall(HandlyCall(
-                    title: user.displayName,
-                    type: 'ball',
-                    reward: ({'food': 'cake'}),
-                    money: 15,
-                    name: user.displayName,
-                    rating:  rating,
-                    user: user.uid,
-                    time: DateTime.now(),
-
-                  ));
+                onPressed: () {
+                  if (fabKey.currentState.isOpen) {
+                    fabKey.currentState.close();
+                  } else {
+                    fabKey.currentState.open();
+                  }
+                  Navigator.pushNamed(context, '/create_new_handly_call');
                 }
             ),
             IconButton(
@@ -260,6 +187,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 color: Colors.amberAccent,
                 iconSize: 40,
                 onPressed: () {
+                  if (fabKey.currentState.isOpen) {
+                    fabKey.currentState.close();
+                  } else {
+                    fabKey.currentState.open();
+                  }
                   print('Lets meet up');
                 }
             ),

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:handly_app/pages/create_handly/create_handly_call.dart';
 import 'package:handly_app/pages/home/home.dart';
 import 'package:handly_app/pages/login/choose_account_widget.dart';
 import 'package:handly_app/pages/login/create_account.dart';
@@ -31,6 +32,7 @@ class HandlyApp extends StatelessWidget {
           '/create_account': (context) => CreateNewAccount(),
           '/sign_in': (context) => SignIn(),
           '/choose_account': (context) => ChooseAccount(),
+          '/create_new_handly_call': (context) => CreateNewHandlyCall(),
         },
       ),
     );

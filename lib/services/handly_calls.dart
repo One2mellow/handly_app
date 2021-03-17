@@ -14,7 +14,7 @@ class HandlyCallsDatabaseService {
       'reward': call.reward,
       'money': call.money,
       'name': call.name,
-      'rating': call.rating,
+      'rating': call.score,
       'user': call.user,
       'time': call.time,
     });
@@ -29,7 +29,7 @@ class HandlyCallsDatabaseService {
         reward: document.data()['reward'] ?? null,
         money: document.data()['money'] ?? 0,
         name: document.data()['name'] ?? '',
-        rating: document.data()['rating'] ?? 25,
+        score: document.data()['score'] ?? 25,
         user: document.data()['user'] ?? null,
       );
     }).toList() ;
