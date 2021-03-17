@@ -10,7 +10,7 @@ class HandlyCallTile extends StatelessWidget {
   Widget build(BuildContext context) {
     String _rwrd;
     if (handlyCall.reward == ''){
-       _rwrd = handlyCall.money.toString();
+       _rwrd = handlyCall.money.toString() + ' ₪';
     } else {
       _rwrd = handlyCall.reward;
     }
