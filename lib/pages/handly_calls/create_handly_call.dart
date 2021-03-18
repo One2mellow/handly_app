@@ -205,6 +205,7 @@ class _CreateNewHandlyCallState extends State<CreateNewHandlyCall> {
                   ),
                     onPressed: () async {
                     if(formKey.currentState.validate()) {
+                      print(description);
                       setState(() => loading = true);
                       await HandlyCallsDatabaseService(uid: (_ath.currentUser
                           .uid + ' time ' + (DateTime

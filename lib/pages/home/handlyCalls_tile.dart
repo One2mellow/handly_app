@@ -20,18 +20,39 @@ class HandlyCallTile extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0),
         child: ListTileTheme(
-          child: ListTile(
-            onTap: () {
-              showModalBottomSheet(context: context, builder: (context) {
-                return HandlyCallDetails(handlycall: handlyCall,);
-              },
-                backgroundColor: Color.fromRGBO(3, 218, 198, 0.2),
-                barrierColor: Colors.indigo.withOpacity(0.25),
-              );
-            },
+          child: ExpansionTile(
             leading: Icon(Icons.pin_drop_outlined),
             title: Text(handlyCall.title),
             subtitle: Text('${handlyCall.name} offers a reward of: $_rwrd '),
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(25, 0, 10, 10),
+                    child: Column(
+                      children: [
+                        Text(
+                            'Type of help needed: ${handlyCall.type}',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+                        Text(
+                          'The job: ${handlyCall.description.toString()}',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+              ],
           ),
         ),
       ),

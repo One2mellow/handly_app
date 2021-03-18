@@ -15,6 +15,7 @@ class HandlyCallsDatabaseService {
       'money': call.money,
       'name': call.name,
       'rating': call.score,
+      'description': call.description,
       'user': call.user,
       'time': call.time,
     });
