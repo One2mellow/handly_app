@@ -101,7 +101,7 @@ class _CreateNewHandlyCallState extends State<CreateNewHandlyCall> {
                 ), //description
                 SizedBox(height: 13,),
                 TextFormField(
-                  maxLength: 12,
+                  maxLength: 20,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   onChanged: (val) {
                     setState(() => type = val);

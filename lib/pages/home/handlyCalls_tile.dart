@@ -22,36 +22,79 @@ class HandlyCallTile extends StatelessWidget {
         child: ListTileTheme(
           child: ExpansionTile(
             leading: Icon(Icons.pin_drop_outlined),
-            title: Text(handlyCall.title),
-            subtitle: Text('${handlyCall.name} offers a reward of: $_rwrd '),
+            title: Text(
+                handlyCall.title,
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
+            ),
+            ),
+            subtitle: Row(
+              children: [
+                Text(
+                  '${handlyCall.name} offers a reward of: ',
+                  style: TextStyle(
+                    fontSize: 15.5,
+                  ),
+                ),
+                Text(
+                  _rwrd,
+                  style: TextStyle(
+                    fontSize: 15.5,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(25, 0, 10, 10),
-                    child: Column(
+              Padding(
+                padding: EdgeInsets.fromLTRB(25, 0, 10, 30),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                            'Type of help needed: ${handlyCall.type}',
+                          'Type of help needed:  ',
                           style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        Text(
+                          handlyCall.type,
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                        SizedBox(height: 30,),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              'The job:  ',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
                         Text(
                           handlyCall.description,
                           style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ],
-              )
+                  ],
+                )
+              ),
               ],
           ),
         ),
