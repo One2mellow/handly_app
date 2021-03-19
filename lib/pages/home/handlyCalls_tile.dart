@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:handly_app/models/handly_calls_model.dart';
-import 'package:handly_app/pages/handly_calls/handly_call_details.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HandlyCallTile extends StatelessWidget {
   final HandlyCall handlyCall;
@@ -95,6 +96,12 @@ class HandlyCallTile extends StatelessWidget {
                   ],
                 )
               ),
+              IconButton(
+                  icon: Icon(Icons.my_location),
+                  onPressed: () {
+                    launch('https://www.google.com/maps/search/?api=1&query=${handlyCall.location.latitude},${handlyCall.location.longitude}');
+                  }
+              )
               ],
           ),
         ),

@@ -33,6 +33,7 @@ dependencies:
   provider: ^5.0.0
   location: ^4.1.1
   geoflutterfire2: ^2.3.0
+  url_launcher: ^6.0.2
   flutter_spinkit: "^4.1.2"
   numberpicker: ^2.0.0
   animations: ^2.0.0
