@@ -32,6 +32,8 @@ dependencies:
   flutter_facebook_auth: "3.0.0+1"
   provider: ^5.0.0
   flutter_spinkit: "^4.1.2"
+  numberpicker: ^2.0.0
+  animations: ^2.0.0
   flutter:
     sdk: flutter
 
