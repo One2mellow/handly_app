@@ -29,7 +29,7 @@ class HandlyCallTile extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
             ),
-            subtitle: Row(
+            subtitle: Wrap(
               children: [
                 Text(
                   '${handlyCall.name} offers a reward of: ',
