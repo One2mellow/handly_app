@@ -44,12 +44,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
     return StreamProvider<List<HandlyCall>>.value(
       value: HandlyCallsDatabaseService().handlyCalls,
-      child: /*Scaffold(
-        backgroundColor: Colors.orange.shade50,
-        body: HandlyCallsList(),
-      )
-      */
-       Scaffold(
+      child: Scaffold(
         drawer: Drawer(
           elevation: 1,
           child: Container(

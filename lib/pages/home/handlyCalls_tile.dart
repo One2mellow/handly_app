@@ -41,7 +41,7 @@ class HandlyCallTile extends StatelessWidget {
                         ),
                         SizedBox(height: 10,),
                         Text(
-                          'The job: ${handlyCall.description.toString()}',
+                          handlyCall.description,
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.bold,

@@ -22,19 +22,21 @@ class HandlyCallsDatabaseService {
   }
 
   //handly calls from snapshot
-  List<HandlyCall> _handlyCallListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.docs.map((document) {
-      return HandlyCall(
-        title: document.data()['title'] ?? '',
-        type: document.data()['type'] ?? '',
-        reward: document.data()['reward'] ?? null,
-        money: document.data()['money'] ?? 0,
-        name: document.data()['name'] ?? '',
-        score: document.data()['score'] ?? 25,
-        user: document.data()['user'] ?? null,
-      );
-    }).toList() ;
-  }
+    List<HandlyCall> _handlyCallListFromSnapshot(QuerySnapshot snapshot) {
+      return snapshot.docs.map((document) {
+        return HandlyCall(
+          title: document.data()['title'] ?? '',
+          type: document.data()['type'] ?? '',
+          reward: document.data()['reward'] ?? null,
+          money: document.data()['money'] ?? 0,
+          name: document.data()['name'] ?? '',
+          score: document.data()['score'] ?? 25,
+          user: document.data()['user'] ?? null,
+          description: document.data()['description'] ?? 'No description',
+          time: document.data()['time'] ?? null,
+        );
+      }).toList() ;
+    }
 
 
   Future getNum() async {
