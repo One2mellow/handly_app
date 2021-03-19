@@ -1,6 +1,7 @@
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:handly_app/models/handly_calls_model.dart';
+import 'package:handly_app/pages/handly_calls/create_handly_call.dart';
 import 'package:handly_app/pages/home/handlyCalls_list.dart';
 import 'package:handly_app/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -174,7 +175,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   } else {
                     fabKey.currentState.open();
                   }
-                  Navigator.pushNamed(context, '/create_new_handly_call');
+                  showModalBottomSheet(context: context, builder: (context) {
+                    return CreateNewHandlyCall();
+                  },
+                    backgroundColor: Color.fromRGBO(3, 218, 198, 0.0001),
+                    barrierColor: Colors.indigo.withOpacity(0.25),
+                    isScrollControlled: true,
+                  );
+                  // Navigator.pushNamed(context, '/create_new_handly_call');
                 }
             ),
             IconButton(
