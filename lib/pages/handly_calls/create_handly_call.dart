@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:handly_app/pages/shared/loading.dart';
 import 'package:handly_app/models/handly_calls_model.dart';
 import 'package:handly_app/services/handly_calls.dart';
+import 'package:location/location.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 class CreateNewHandlyCall extends StatefulWidget {
@@ -23,6 +24,7 @@ class _CreateNewHandlyCallState extends State<CreateNewHandlyCall> {
   var time;
 
   @override
+
   Widget build(BuildContext context) {
     if (loading) {
       return Loading();
@@ -208,7 +210,7 @@ class _CreateNewHandlyCallState extends State<CreateNewHandlyCall> {
                     ),
                       onPressed: () async {
                       if(formKey.currentState.validate()) {
-                        print(description);
+
                         setState(() => loading = true);
                         await HandlyCallsDatabaseService(uid: (_ath.currentUser
                             .uid + ' time ' + (DateTime

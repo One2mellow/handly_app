@@ -175,14 +175,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   } else {
                     fabKey.currentState.open();
                   }
-                  showModalBottomSheet(context: context, builder: (context) {
-                    return CreateNewHandlyCall();
-                  },
-                    backgroundColor: Color.fromRGBO(3, 218, 198, 0.0001),
-                    barrierColor: Colors.indigo.withOpacity(0.25),
-                    isScrollControlled: true,
-                  );
-                  // Navigator.pushNamed(context, '/create_new_handly_call');
+                  Navigator.pushNamed(context, '/create_new_handly_call');
                 }
             ),
             IconButton(
