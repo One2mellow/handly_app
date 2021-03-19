@@ -31,7 +31,8 @@ dependencies:
   google_sign_in: "^4.5.1"
   flutter_facebook_auth: "3.0.0+1"
   provider: ^5.0.0
-  location: 2.5.4
+  location: ^4.1.1
+  geoflutterfire2: ^2.3.0
   flutter_spinkit: "^4.1.2"
   numberpicker: ^2.0.0
   animations: ^2.0.0

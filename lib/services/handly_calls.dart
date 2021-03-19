@@ -18,6 +18,7 @@ class HandlyCallsDatabaseService {
       'description': call.description,
       'user': call.user,
       'time': call.time,
+      'location': call.location,
     });
   }
 

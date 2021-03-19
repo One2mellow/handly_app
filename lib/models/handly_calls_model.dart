@@ -1,3 +1,6 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geoflutterfire2/geoflutterfire2.dart';
 import 'package:location/location.dart';
 
 class HandlyCall {
@@ -11,7 +14,8 @@ class HandlyCall {
   final String user;
   final String description;
   var time;
+  GeoPoint location;
 
-  HandlyCall({this.title, this.type, this.reward, this.money, this.name, this.score, this.user, this.description, this.time});
+  HandlyCall({this.title, this.type, this.reward, this.money, this.name, this.score, this.user, this.description, this.time, this.location});
 
 }
