@@ -19,6 +19,7 @@ class _HandlyCallsListState extends State<HandlyCallsList> {
     final handlyCalls = Provider.of<List<HandlyCall>>(context);
     
     return ListView.builder(
+      cacheExtent: 100.0,
       itemCount: handlyCalls.length,
         itemBuilder: (context, index) {
         return HandlyCallTile(handlyCall: handlyCalls[index],);
