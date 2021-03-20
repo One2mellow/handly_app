@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geoflutterfire2/geoflutterfire2.dart';
 import 'package:handly_app/pages/shared/loading.dart';
 import 'package:handly_app/models/handly_calls_model.dart';
+import 'package:handly_app/services/get_location.dart';
 import 'package:handly_app/services/handly_calls.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:location/location.dart';
+
 
 class CreateNewHandlyCall extends StatefulWidget {
   @override
@@ -21,8 +24,13 @@ class _CreateNewHandlyCallState extends State<CreateNewHandlyCall> {
   String title = '', type = '', reward = '', name = '', user = '', description = '';
   int money = 0, score = 0;
   var time;
+  GeoFirePoint myLocation;
+  final geo = GeoFlutterFire();
+  LocationData locationData;
+
 
   @override
+
   Widget build(BuildContext context) {
     if (loading) {
       return Loading();
@@ -208,8 +216,17 @@ class _CreateNewHandlyCallState extends State<CreateNewHandlyCall> {
                     ),
                       onPressed: () async {
                       if(formKey.currentState.validate()) {
-                        print(description);
-                        setState(() => loading = true);
+
+
+                        locationData = await getLocation();
+
+                        setState(()  {
+                          loading = true;
+                          myLocation = geo.point(latitude: locationData.latitude, longitude: locationData.longitude);
+                          }
+                        );
+
+
                         await HandlyCallsDatabaseService(uid: (_ath.currentUser
                             .uid + ' time ' + (DateTime
                             .now()
@@ -224,6 +241,7 @@ class _CreateNewHandlyCallState extends State<CreateNewHandlyCall> {
                           user: _ath.currentUser.uid,
                           description: description,
                           time: DateTime.now(),
+                          location: myLocation.geoPoint,
                         ));
                         Navigator.pop(context);
                        } else {

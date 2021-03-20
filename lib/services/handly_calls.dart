@@ -18,6 +18,7 @@ class HandlyCallsDatabaseService {
       'description': call.description,
       'user': call.user,
       'time': call.time,
+      'location': call.location,
     });
   }
 
@@ -34,6 +35,7 @@ class HandlyCallsDatabaseService {
           user: document.data()['user'] ?? null,
           description: document.data()['description'] ?? 'No description',
           time: document.data()['time'] ?? null,
+          location: document.data()['location'] ?? null,
         );
       }).toList() ;
     }
