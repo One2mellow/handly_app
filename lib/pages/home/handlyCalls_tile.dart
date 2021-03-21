@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geoflutterfire2/geoflutterfire2.dart';
 import 'package:handly_app/models/handly_calls_model.dart';
+import 'package:handly_app/models/location_model.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HandlyCallTile extends StatelessWidget {
@@ -10,12 +12,23 @@ class HandlyCallTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     String _rwrd;
+
+    final geo = GeoFlutterFire();
+    var locationModel = Provider.of<LocationModel>(context);
+    var point = geo.point(latitude: handlyCall.location.latitude, longitude: handlyCall.location.longitude);
+
+    var distance = point.distance(lat: locationModel.latitude, lng: locationModel.longitude);
+
+
     if (handlyCall.reward == ''){
        _rwrd = handlyCall.money.toString() + ' ₪';
     } else {
       _rwrd = handlyCall.reward;
     }
+
+
     return Padding(
         padding: EdgeInsets.only(top: 8),
       child: Card(
@@ -87,6 +100,28 @@ class HandlyCallTile extends StatelessWidget {
                         ),
                         Text(
                           handlyCall.description,
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              'Distance From you:  ',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          distance.toStringAsFixed(2) + ' Km',
                           style: TextStyle(
                             fontSize: 15,
                           ),
