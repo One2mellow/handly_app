@@ -11,7 +11,9 @@ class HandlyCallDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+/*
       color: Color.fromRGBO(3, 218, 198, 0.7),
+*/
       clipBehavior: Clip.antiAlias,
       elevation: 0.0,
       child: Column(

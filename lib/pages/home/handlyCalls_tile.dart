@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoflutterfire2/geoflutterfire2.dart';
 import 'package:handly_app/models/handly_calls_model.dart';
 import 'package:handly_app/models/location_model.dart';
+import 'package:handly_app/pages/handly_calls/handly_call_details.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -132,11 +134,26 @@ class HandlyCallTile extends StatelessWidget {
                   ],
                 )
               ),
-              IconButton(
-                  icon: Icon(Icons.my_location),
-                  onPressed: () {
-                    launch('https://www.google.com/maps/search/?api=1&query=${handlyCall.location.latitude},${handlyCall.location.longitude}');
-                  }
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    iconSize: 22,
+                      icon: Icon(Icons.my_location),
+                      onPressed: () {
+                        launch('https://www.google.com/maps/search/?api=1&query=${handlyCall.location.latitude},${handlyCall.location.longitude}');
+                      }
+                  ),
+                  IconButton(
+                    iconSize: 20,
+                      icon: Icon(FontAwesomeIcons.user),
+                    onPressed: () {
+                      showModalBottomSheet(context: context, builder: (BuildContext context){
+                        return HandlyCallDetails(handlycall: handlyCall,);
+                      });
+                    },
+                      ),
+                ],
               ),
               ],
           ),
