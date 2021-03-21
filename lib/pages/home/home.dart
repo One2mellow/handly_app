@@ -157,7 +157,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
          floatingActionButton: FabCircularMenu(
            key: fabKey,
           fabOpenIcon: Icon(Icons.record_voice_over_sharp),
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.bottomRight,
           ringDiameter: 200,
           ringWidth: 2,
           fabColor: Colors.yellowAccent,
@@ -167,8 +167,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           children: [
             IconButton(
                 icon: Icon(Icons.pan_tool),
-                color: Colors.amberAccent,
-                iconSize: 40,
+                color: Colors.amber[700],
+                iconSize: 50,
                 onPressed: () {
                   if (fabKey.currentState.isOpen) {
                     fabKey.currentState.close();
@@ -180,8 +180,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ),
             IconButton(
                 icon: Icon(Icons.group_add),
-                color: Colors.amberAccent,
-                iconSize: 40,
+                color: Colors.amber[700],
+                iconSize: 55,
                 onPressed: () {
                   if (fabKey.currentState.isOpen) {
                     fabKey.currentState.close();

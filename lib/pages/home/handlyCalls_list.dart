@@ -23,7 +23,7 @@ class _HandlyCallsListState extends State<HandlyCallsList> {
     return StreamProvider<LocationModel>(
       create: (_) => LocationService().getStreamData,
       child: ListView.builder(
-        cacheExtent: 100.0,
+        cacheExtent: 200,
         itemCount: handlyCalls.length,
           itemBuilder: (context, index) {
           return HandlyCallTile(handlyCall: handlyCalls[index],);

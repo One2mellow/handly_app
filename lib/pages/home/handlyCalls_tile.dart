@@ -81,7 +81,7 @@ class HandlyCallTile extends StatelessWidget {
                             fontSize: 15,
                           ),
                         ),
-                        SizedBox(height: 30,),
+                        SizedBox(height: 20,),
                       ],
                     ),
                     Row(
@@ -104,6 +104,7 @@ class HandlyCallTile extends StatelessWidget {
                             fontSize: 15,
                           ),
                         ),
+                        SizedBox(height: 30,),
                       ],
                     ),
                     Row(
@@ -136,7 +137,7 @@ class HandlyCallTile extends StatelessWidget {
                   onPressed: () {
                     launch('https://www.google.com/maps/search/?api=1&query=${handlyCall.location.latitude},${handlyCall.location.longitude}');
                   }
-              )
+              ),
               ],
           ),
         ),
