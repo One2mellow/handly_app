@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:handly_app/pages/shared/loading.dart';
 import 'package:handly_app/services/auth.dart';
 
@@ -18,7 +19,7 @@ class _CreateNewAccountState extends State<CreateNewAccount> {
 
   final AuthService _auth = AuthService();
 
-  String email = '', password = '', passwordConfirm = '';
+  String email = '', password = '', passwordConfirm = '', phoneNumber = '';
   bool _termsAgreed = false;
   final formKey = GlobalKey<FormState>();
   bool loading = false;

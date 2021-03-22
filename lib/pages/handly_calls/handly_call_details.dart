@@ -1,9 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:handly_app/models/handly_calls_model.dart';
+import 'package:handly_app/services/auth.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HandlyCallDetails extends StatelessWidget {
 
   final HandlyCall handlycall;
+  final FirebaseAuth _ath = FirebaseAuth.instance;
 
   HandlyCallDetails({this.handlycall});
 
@@ -29,7 +34,7 @@ class HandlyCallDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  handlycall.title,
+                  _ath.currentUser.displayName,
                   style: TextStyle(
                     fontSize: 25,
                     fontFamily: 'Comforta',
@@ -45,18 +50,11 @@ class HandlyCallDetails extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(width: 10,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    'Type of help needed: ${handlycall.type}',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+              IconButton(
+                  onPressed: () {
+                    launch('https://wa.me/${_ath.currentUser.phoneNumber}');
+                  },
+                  icon: Icon(FontAwesomeIcons.whatsapp),
               ),
             ],
           ),
